@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Piece",
+  "type": "object",
+  "required": [
+    "name",
+    "paths"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "paths": {
+      "type": "array"
+    }
+  }
+}

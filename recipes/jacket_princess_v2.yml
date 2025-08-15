@@ -1,0 +1,6 @@
+name: jacket_princess_v2
+block: jacket/m_sl40_v2.json
+panelization: 2pc_front_princess
+defaults:
+  zip_length: 550
+  pockets: ["welt_upper"]

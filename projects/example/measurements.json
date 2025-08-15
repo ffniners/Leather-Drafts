@@ -1,0 +1,18 @@
+{
+  "units": "mm",
+  "body": {
+    "chest": 1020,
+    "waist": 880,
+    "hip": 1000,
+    "back_neck_to_waist": 470,
+    "shoulder_width": 460,
+    "arm_length": 620,
+    "bicep": 330,
+    "wrist": 180
+  },
+  "fit": {
+    "ease_chest": 80,
+    "ease_waist": 60,
+    "ease_bicep": 40
+  }
+}

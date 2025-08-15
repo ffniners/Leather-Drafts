@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Measurements",
+  "type": "object",
+  "required": [
+    "units",
+    "body",
+    "fit"
+  ],
+  "properties": {
+    "units": {
+      "type": "string",
+      "enum": [
+        "mm"
+      ]
+    },
+    "body": {
+      "type": "object"
+    },
+    "fit": {
+      "type": "object"
+    }
+  }
+}

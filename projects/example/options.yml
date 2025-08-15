@@ -1,0 +1,4 @@
+seam_allowance: 8
+hem_allowance: 20
+leather:
+  thickness: 1.6
