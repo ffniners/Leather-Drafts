@@ -1,5 +1,90 @@
 {
-  "name": "jacket/m_sl40_v2",
-  "version": "2",
-  "notes": "Placeholder block \u2013 replace with real control points/curves."
+  "name": "jacket_block_v1",
+  "units": "mm",
+  "version": "1",
+  "notes": "Starter parametric block for a mens jacket (front/back/sleeve). Approximations chosen for stability; refine as needed.",
+  "params": {
+    "W": "(M.chest + F.ease_chest) / 4",
+    "L": "M.back_neck_to_waist + O.hem_allowance",
+    "AD": "M.chest/6 + 65",                
+    "NW": "min(M.shoulder_width * 0.14, 80)", 
+    "SW": "M.shoulder_width / 2",         
+    "SS": "15"                              
+  },
+  "pieces": [
+    {
+      "name": "back_base",
+      "grain": ["10", "0", "10", "({L})"],
+      "paths": [
+        { "type": "MOVE",  "expr": ["0", "0"] },                     
+        { "type": "LINE",  "expr": ["{NW}", "0"] },                   
+        { "type": "LINE",  "expr": ["{SW}", "{SS}"] },                
+        { "type": "CURVE", "expr": {
+          "cp1": ["{SW}+20", "{SS} + ({AD}-{SS})*0.25"],
+          "cp2": ["{W}-30", "({AD})*0.6"],
+          "to":  ["{W}", "{AD}"]
+        }},
+        { "type": "LINE",  "expr": ["{W}", "{L}"] },                  
+        { "type": "LINE",  "expr": ["0", "{L}"] },                    
+        { "type": "CLOSE" }
+      ],
+      "notches": [
+        ["{W}", "{AD}", "back armhole depth"]
+      ]
+    },
+    {
+      "name": "front_base",
+      "grain": ["10", "0", "10", "({L})"],
+      "params": {
+        "FD": "70"                     
+      },
+      "paths": [
+        { "type": "MOVE",  "expr": ["0", "0"] },                      
+        { "type": "CURVE", "expr": {                                   
+          "cp1": ["{NW}*0.2", "0"],
+          "cp2": ["{NW}", "{FD}*0.3"],
+          "to":  ["{NW}", "{FD}"]
+        }},
+        { "type": "LINE",  "expr": ["{SW}", "{SS}"] },                
+        { "type": "CURVE", "expr": {                                   
+          "cp1": ["{SW}+25", "{SS} + ({AD}-{SS})*0.22"],
+          "cp2": ["{W}-25", "({AD})*0.62"],
+          "to":  ["{W}", "{AD}"]
+        }},
+        { "type": "LINE",  "expr": ["{W}", "{L}"] },                  
+        { "type": "LINE",  "expr": ["0", "{L}"] },                    
+        { "type": "LINE",  "expr": ["0", "0"] },                      
+        { "type": "CLOSE" }
+      ],
+      "notches": [
+        ["{W}", "{AD}", "front armhole depth"]
+      ]
+    },
+    {
+      "name": "sleeve_onepiece",
+      "notes": "Simple one-piece sleeve based on bicep/wrist and arm length; crown is a smooth cubic.",
+      "params": {
+        "SL": "M.arm_length",
+        "BI": "M.bicep + F.ease_bicep",
+        "WR": "M.wrist + 30",           
+        "HC": "min( (M.bicep+F.ease_bicep)*0.33 , 140 )"   
+      },
+      "grain": ["10", "0", "10", "({SL})"],
+      "paths": [
+        { "type": "MOVE",  "expr": ["-{BI}/2", "0"] },               
+        { "type": "CURVE", "expr": {                                  
+          "cp1": ["-{BI}/2 * 0.4", "-{HC}*0.6"],
+          "cp2": ["{BI}/2 * 0.4", "-{HC}*0.6"],
+          "to":  ["{BI}/2", "0"]
+        }},
+        { "type": "LINE",  "expr": ["{WR}/2", "{SL}"] },             
+        { "type": "LINE",  "expr": ["-{WR}/2", "{SL}"] },            
+        { "type": "LINE",  "expr": ["-{BI}/2", "0"] },               
+        { "type": "CLOSE" }
+      ],
+      "notches": [
+        ["0", "0", "cap center"]
+      ]
+    }
+  ]
 }
