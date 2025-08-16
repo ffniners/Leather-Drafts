@@ -24,3 +24,11 @@ pl = "engine.cli.main:app"
 
 [tool.setuptools.package-data]
 patternlab = ["schemas/*.json", "recipes/*.yml", "blocks/**/*.json"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["engine*"]
+exclude = ["projects*", "recipes*", "schemas*", "blocks*", "tests*", ".github*"]
+
+[tool.setuptools.package-data]
+engine = []
